@@ -14,7 +14,7 @@ $response = $responseText | ConvertFrom-Json
 if ($response.version -ne 1 -or -not $response.ok -or $response.result.identity.key -ne "sub:$syntheticSubject") {
     throw 'JSON CLI did not return the expected safe identity response.'
 }
-if ($responseText.Contains($token, [StringComparison]::Ordinal)) {
+if ($responseText.IndexOf($token, [StringComparison]::Ordinal) -ge 0) {
     throw 'JSON CLI echoed a synthetic token in its response.'
 }
 

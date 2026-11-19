@@ -7,6 +7,19 @@ namespace ChatGpt.Accounts.Tests;
 
 public sealed class CredentialInspectionTests
 {
+    [Fact]
+    public void ReadClaimsFromTokenReturnsSafeClaimsWithoutTokenValue()
+    {
+        var token = CreateJwt(new { sub = "subject-1", email = "reader@example.test", plan = "Plus" });
+
+        var claims = CredentialInspector.ReadClaimsFromToken(token);
+
+        Assert.Equal("subject-1", claims.Subject);
+        Assert.Equal("reader@example.test", claims.Email);
+        Assert.Equal("Plus", claims.PlanType);
+        Assert.Null(CredentialInspector.ReadClaimsFromToken("malformed.token").Subject);
+    }
+
     private static readonly DateTimeOffset Now = new(2026, 11, 19, 10, 0, 0, TimeSpan.Zero);
 
     [Fact]

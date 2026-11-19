@@ -23,7 +23,7 @@
 
 ```powershell
 dotnet pack .\src\ChatGpt.Accounts\ChatGpt.Accounts.csproj -c Release -o .\artifacts\packages
-dotnet add <проект-потребитель> package ChatGpt.Accounts --version 0.1.0-preview.1 --source .\artifacts\packages
+dotnet add <проект-потребитель> package ChatGpt.Accounts --version 0.1.0-preview.2 --source .\artifacts\packages
 ```
 
 ## Пример API

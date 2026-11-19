@@ -23,7 +23,7 @@ The package is built locally and is not published to NuGet:
 
 ```powershell
 dotnet pack .\src\ChatGpt.Accounts\ChatGpt.Accounts.csproj -c Release -o .\artifacts\packages
-dotnet add <consumer-project> package ChatGpt.Accounts --version 0.1.0-preview.1 --source .\artifacts\packages
+dotnet add <consumer-project> package ChatGpt.Accounts --version 0.1.0-preview.2 --source .\artifacts\packages
 ```
 
 ## API example

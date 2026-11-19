@@ -14,6 +14,9 @@ public static class CredentialInspector
     private const int MaximumEmailCharacters = 320;
     private const int MaximumDisplayNameCharacters = 120;
 
+    /// <summary>Reads safe non-secret claims from a JWT payload without validating its signature.</summary>
+    public static AccountClaims ReadClaimsFromToken(string? token) => JwtClaimReader.Read(token);
+
     public static CredentialInspection Inspect(ReadOnlyMemory<byte> credentialBytes, DateTimeOffset now)
     {
         if (credentialBytes.IsEmpty || credentialBytes.Length > MaximumDocumentBytes)
