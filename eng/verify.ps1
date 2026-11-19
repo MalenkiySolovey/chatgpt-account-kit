@@ -32,14 +32,14 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Package creation failed.' }
 
     Add-Type -AssemblyName System.IO.Compression.FileSystem
-    $package = Join-Path $feed 'ChatGpt.Accounts.0.1.0-preview.2.nupkg'
+    $package = Join-Path $feed 'ChatGpt.Accounts.0.1.0-preview.3.nupkg'
     $archive = [System.IO.Compression.ZipFile]::OpenRead($package)
     try {
         $nuspecEntry = $archive.Entries | Where-Object { $_.FullName -like '*.nuspec' } | Select-Object -First 1
         if ($null -eq $nuspecEntry) { throw 'Package does not contain a nuspec.' }
         $reader = [IO.StreamReader]::new($nuspecEntry.Open())
         try { [xml]$nuspec = $reader.ReadToEnd() } finally { $reader.Dispose() }
-        if ($nuspec.package.metadata.id -ne 'ChatGpt.Accounts' -or $nuspec.package.metadata.version -ne '0.1.0-preview.2') {
+        if ($nuspec.package.metadata.id -ne 'ChatGpt.Accounts' -or $nuspec.package.metadata.version -ne '0.1.0-preview.3') {
             throw 'Package identity or version did not match the expected pin.'
         }
     }

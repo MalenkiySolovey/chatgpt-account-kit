@@ -78,6 +78,21 @@ public sealed class CredentialInspectionTests
     }
 
     [Fact]
+    public void SubscriptionExtractorDoesNotCreateMetadataForFreePlanStart()
+    {
+        var token = CreateJwt(new Dictionary<string, object>
+        {
+            ["https://api.openai.com/auth"] = new Dictionary<string, object>
+            {
+                ["chatgpt_plan_type"] = "free",
+                ["chatgpt_subscription_active_start"] = "2026-08-15T00:00:00Z",
+            },
+        });
+
+        Assert.Null(SubscriptionMetadataExtractor.ExtractFromJwt(token, Now));
+    }
+
+    [Fact]
     public void SubscriptionExtractorReadsNamespacedPeriodAndEstimatesKnownMonthlyPlan()
     {
         var token = CreateJwt(new Dictionary<string, object>

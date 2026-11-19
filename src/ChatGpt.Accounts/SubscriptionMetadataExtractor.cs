@@ -78,6 +78,11 @@ public static class SubscriptionMetadataExtractor
                 }
             }
 
+            if (string.Equals(plan, "free", StringComparison.OrdinalIgnoreCase))
+            {
+                return null;
+            }
+
             return start.HasValue
                 ? new DetectedSubscriptionMetadata(start, null, now, plan, SubscriptionMetadataSource.OAuthTokenClaim)
                 : null;
