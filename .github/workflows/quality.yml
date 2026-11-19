@@ -32,7 +32,7 @@ jobs:
       - name: Pack
         run: dotnet pack src/ChatGpt.Accounts/ChatGpt.Accounts.csproj -c Release --no-build -o artifacts/packages
       - name: Restore package-only consumer
-        run: dotnet restore examples/ChatGpt.Accounts.PackageConsumer/ChatGpt.Accounts.PackageConsumer.csproj --source "${{ github.workspace }}/artifacts/packages;https://api.nuget.org/v3/index.json"
+        run: dotnet restore examples/ChatGpt.Accounts.PackageConsumer/ChatGpt.Accounts.PackageConsumer.csproj --configfile eng/NuGet.PackageSmoke.config
       - name: External package consumer smoke
         run: dotnet run --project examples/ChatGpt.Accounts.PackageConsumer/ChatGpt.Accounts.PackageConsumer.csproj -c Release --no-restore
       - name: Verify patch whitespace

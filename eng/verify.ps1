@@ -47,8 +47,7 @@ try {
         $archive.Dispose()
     }
 
-    $packageSources = "$feed;https://api.nuget.org/v3/index.json"
-    dotnet restore $consumer --source $packageSources
+    dotnet restore $consumer --configfile 'eng/NuGet.PackageSmoke.config'
     if ($LASTEXITCODE -ne 0) { throw 'Package consumer restore failed.' }
 
     dotnet run --project $consumer -c Release --no-restore
